@@ -4,6 +4,7 @@ import {useState} from 'react';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import AddOn from '@/app/components/AddOn';
+import {isEmpty} from 'lodash';
 
 const AddOnsContainer = styled.div`
   display: flex;
@@ -68,9 +69,9 @@ const addons = [
 ];
 
 const Addons = ({nextStep, prevStep, handleFormDataChange, data}) => {
-    const [selectedAddOns, setSelectedAddOns] = useState(data || []);
-    debugger
+    const [selectedAddOns, setSelectedAddOns] = useState(isEmpty(data.addOns) ? [] : data.addOns);
     const billingCycle = data?.billingCycle || 'monthly';
+    debugger
 
     const handleAddOnSelect = (addOnId) => {
         if (selectedAddOns.find((addon) => addon.id === addOnId)) {
@@ -87,7 +88,6 @@ const Addons = ({nextStep, prevStep, handleFormDataChange, data}) => {
 
     const handleSubmit = () => {
         handleFormDataChange('addOns', selectedAddOns);
-        debugger
         nextStep();
     };
 
@@ -103,7 +103,7 @@ const Addons = ({nextStep, prevStep, handleFormDataChange, data}) => {
                     <AddOn
                         key={addOn.id}
                         isMonthly={billingCycle === 'monthly'}
-                        isSelected={selectedAddOns.some((ao) => ao.id === addOn.id)}
+                        isSelected={selectedAddOns?.some((ao) => ao.id === addOn.id)}
                         monthlyPrice={addOn.monthlyPrice}
                         title={addOn.title}
                         subtitle={addOn.subTitle}

@@ -51,7 +51,10 @@ export default function Home() {
                                  data={formData.userPlan}/>;
             case 3:
                 return <Addons nextStep={nextStep} prevStep={prevStep}
-                               handleFormDataChange={handleFormDataChange} data={formData.addOns}/>;
+                               handleFormDataChange={handleFormDataChange} data={{
+                    addOns: formData?.addOns,
+                    billingCycle: formData?.userPlan?.billingCycle
+                }}/>;
             case 4:
                 return <Summary prevStep={prevStep} data={formData}
                                 changePlan={() => setActiveStep(2)}/>;
