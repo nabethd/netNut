@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b0cba67-78be-4c7d-ab74-19c818286f22" name="Changes" comment="initial commit">
+    <list default="true" id="4b0cba67-78be-4c7d-ab74-19c818286f22" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/AddOn/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/AddOn/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Plan/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Plan/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/components/Steps/AddOns.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Steps/AddOns.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Steps/PersonalInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Steps/PersonalInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Steps/Summary.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Steps/Summary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Steps/UserPlan.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Steps/UserPlan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -42,27 +48,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/drornavon/IdeaProjects/net-nut-project/public&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/drornavon/IdeaProjects/net-nut-project/public",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "show.migrate.to.gradle.popup": "false",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
@@ -83,7 +89,7 @@
       <workItem from="1718948220669" duration="24439000" />
       <workItem from="1719149800366" duration="196000" />
       <workItem from="1719150014046" duration="103000" />
-      <workItem from="1719150200370" duration="1682000" />
+      <workItem from="1719150200370" duration="2198000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1719148848900</created>
@@ -92,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719148848900</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix small issues">
+      <created>1719156726213</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1719156726213</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,7 +113,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="fix small issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix small issues" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

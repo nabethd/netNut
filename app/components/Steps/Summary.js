@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import {useEffect, useState} from 'react';
-import styled from 'styled-components';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 
 const SummaryContainer = styled.div`
   display: flex;
@@ -87,13 +87,12 @@ const AddOnSummary = styled.div`
 
   .add-on-title {
     font-size: 14px;
-    color: #a0a0aa
+    color: #a0a0aa;
   }
 
   .add-on-price {
     font-size: 14px;
     color: #01285a;
-
   }
 `;
 
@@ -113,7 +112,7 @@ const TotalSummary = styled.div`
   .total-price {
     font-size: 24px;
     font-weight: bold;
-    color: #4e43f7
+    color: #4e43f7;
   }
 `;
 
@@ -124,103 +123,116 @@ const ButtonContainer = styled.div`
   width: 100%;
 `;
 
-const Summary = ({prevStep, data, changePlan}) => {
-    const selectedPlan = data?.userPlan?.plan || null;
-    const billingCycle = data?.userPlan?.billingCycle || 'monthly';
-    const selectedAddOns = data?.addOns || [];
-    const [totalPrice, setTotalPrice] = useState(0);
+const Summary = ({ prevStep, data, changePlan }) => {
+  const selectedPlan = data?.userPlan?.plan || null;
+  const billingCycle = data?.userPlan?.billingCycle || "monthly";
+  const selectedAddOns = data?.addOns || [];
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    useEffect(() => {
-        if (selectedPlan) {
-            const planPrice = billingCycle === 'monthly' ? selectedPlan.monthlyPrice : selectedPlan.yearlyPrice;
-            const addOnsPrice = selectedAddOns.reduce((acc, addOn) => {
-                const addOnPrice = billingCycle === 'monthly' ? addOn.monthlyPrice : addOn.yearlyPrice;
-                return acc + parseFloat(addOnPrice);
-            }, 0);
-            setTotalPrice(parseFloat(planPrice) + addOnsPrice);
-        }
-    }, [selectedPlan, billingCycle, selectedAddOns]);
+  useEffect(() => {
+    if (selectedPlan) {
+      const planPrice =
+        billingCycle === "monthly"
+          ? selectedPlan.monthlyPrice
+          : selectedPlan.yearlyPrice;
+      const addOnsPrice = selectedAddOns.reduce((acc, addOn) => {
+        const addOnPrice =
+          billingCycle === "monthly" ? addOn.monthlyPrice : addOn.yearlyPrice;
+        return acc + parseFloat(addOnPrice);
+      }, 0);
+      setTotalPrice(parseFloat(planPrice) + addOnsPrice);
+    }
+  }, [selectedPlan, billingCycle, selectedAddOns]);
 
-    const handleSubmit = () => {
-        console.log(data);
-    };
+  const handleSubmit = () => {
+    console.log(data);
+  };
 
-    return (
-        <SummaryContainer>
-            <div>
-                <h1>Finishing up</h1>
-                <h4>Double-check everything looks OK before confirming.</h4>
+  return (
+    <SummaryContainer>
+      <div>
+        <h1>Finishing up</h1>
+        <h4>Double-check everything looks OK before confirming.</h4>
+      </div>
+
+      <SummaryWrapper>
+        {selectedPlan && (
+          <PlanSummary>
+            <div className="plan-details">
+              <div className="plan-title">
+                {selectedPlan.title} (
+                {billingCycle === "monthly" ? "Monthly" : "Yearly"})
+              </div>
+              <button className="change-button" onClick={changePlan}>
+                Change
+              </button>
             </div>
+            <div className="plan-price">
+              $
+              {billingCycle === "monthly"
+                ? `${selectedPlan.monthlyPrice}/mo`
+                : `${selectedPlan.yearlyPrice}/yr`}
+            </div>
+          </PlanSummary>
+        )}
 
-            <SummaryWrapper>
-                {selectedPlan && (
-                    <PlanSummary>
-                        <div className="plan-details">
-                            <div className="plan-title">
-                                {selectedPlan.title} ({billingCycle === 'monthly' ? 'Monthly' : 'Yearly'})
-                            </div>
-                            <button className="change-button" onClick={changePlan}>Change</button>
-                        </div>
-                        <div className="plan-price">
-                            ${billingCycle === 'monthly' ? `${selectedPlan.monthlyPrice}/mo` : `${selectedPlan.yearlyPrice}/yr`}
-                        </div>
-                    </PlanSummary>
-                )}
+        {selectedAddOns.length > 0 && <Divider />}
 
-                {selectedAddOns.length > 0 && <Divider/>}
+        {selectedAddOns.map((addOn) => (
+          <AddOnSummary key={addOn.id}>
+            <div className="add-on-title">{addOn.title}</div>
+            <div className="add-on-price">
+              +$
+              {billingCycle === "monthly"
+                ? `${addOn.monthlyPrice}/mo`
+                : `${addOn.yearlyPrice}/yr`}
+            </div>
+          </AddOnSummary>
+        ))}
+      </SummaryWrapper>
 
-                {selectedAddOns.map(addOn => (
-                    <AddOnSummary key={addOn.id}>
-                        <div className="add-on-title">{addOn.title}</div>
-                        <div className="add-on-price">
-                            +${billingCycle === 'monthly' ? `${addOn.monthlyPrice}/mo` : `${addOn.yearlyPrice}/yr`}
-                        </div>
-                    </AddOnSummary>
-                ))}
-            </SummaryWrapper>
+      <TotalSummary>
+        <div className="total-label">
+          Total ({billingCycle === "monthly" ? "per month" : "per year"})
+        </div>
+        <div className="total-price">
+          +${totalPrice}/{billingCycle === "monthly" ? "mo" : "yr"}
+        </div>
+      </TotalSummary>
 
-            <TotalSummary>
-                <div className="total-label">Total
-                    ({billingCycle === 'monthly' ? 'per month' : 'per year'})
-                </div>
-                <div
-                    className="total-price">+${totalPrice}/{billingCycle === 'monthly' ? 'mo' : 'yr'}
-                </div>
-            </TotalSummary>
-
-            <ButtonContainer>
-                <Button
-                    variant="text"
-                    sx={{
-                        color: '#9b9ba5',
-                        backgroundColor: 'transparent',
-                        fontWeight: 'bold',
-                        '&:hover': {
-                            backgroundColor: 'transparent',
-                            color: '#01285a'
-                        }
-                    }}
-                    onClick={prevStep}
-                >
-                    Go Back
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    sx={{
-                        backgroundColor: '#473fff',
-                        height: '50px',
-                        '&:hover': {
-                            backgroundColor: '#938cfe'
-                        }
-                    }}
-                >
-                    Confirm
-                </Button>
-            </ButtonContainer>
-        </SummaryContainer>
-    );
+      <ButtonContainer>
+        <Button
+          variant="text"
+          sx={{
+            color: "#9b9ba5",
+            backgroundColor: "transparent",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "#01285a",
+            },
+          }}
+          onClick={prevStep}
+        >
+          Go Back
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          sx={{
+            backgroundColor: "#473fff",
+            height: "50px",
+            "&:hover": {
+              backgroundColor: "#938cfe",
+            },
+          }}
+        >
+          Confirm
+        </Button>
+      </ButtonContainer>
+    </SummaryContainer>
+  );
 };
 
 export default Summary;

@@ -1,12 +1,12 @@
-'use client';
-import {useState} from 'react';
-import styled from 'styled-components';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
-import Plan from '@/app/components/Plan';
-import ArcadeIcon from '../../../public/icon-arcade.svg';
-import AdvancedIcon from '../../../public/icon-advanced.svg';
-import ProIcon from '../../../public/icon-pro.svg';
+"use client";
+import { useState } from "react";
+import styled from "styled-components";
+import Button from "@mui/material/Button";
+import Switch from "@mui/material/Switch";
+import Plan from "@/app/components/Plan";
+import ArcadeIcon from "../../../public/icon-arcade.svg";
+import AdvancedIcon from "../../../public/icon-advanced.svg";
+import ProIcon from "../../../public/icon-pro.svg";
 
 const PlanContainer = styled.div`
   display: flex;
@@ -77,121 +77,130 @@ const ErrorText = styled.div`
 `;
 
 const plans = [
-    {
-        id: 'arcade-plan',
-        icon: ArcadeIcon,
-        monthlyPrice: '9',
-        yearlyPrice: '90',
-        title: 'Arcade'
-    },
-    {
-        id: 'advanced-plan',
-        icon: AdvancedIcon,
-        monthlyPrice: '12',
-        yearlyPrice: '120',
-        title: 'Advanced'
-    },
-    {
-        id: 'pro-plan',
-        icon: ProIcon,
-        monthlyPrice: '15',
-        yearlyPrice: '150',
-        title: 'Pro'
-    }
+  {
+    id: "arcade-plan",
+    icon: ArcadeIcon,
+    monthlyPrice: "9",
+    yearlyPrice: "90",
+    title: "Arcade",
+  },
+  {
+    id: "advanced-plan",
+    icon: AdvancedIcon,
+    monthlyPrice: "12",
+    yearlyPrice: "120",
+    title: "Advanced",
+  },
+  {
+    id: "pro-plan",
+    icon: ProIcon,
+    monthlyPrice: "15",
+    yearlyPrice: "150",
+    title: "Pro",
+  },
 ];
 
-const UserPlan = ({nextStep, prevStep, handleFormDataChange, data}) => {
-    const [selectedPlan, setSelectedPlan] = useState(data?.plan || null);
-    const [billingCycle, setBillingCycle] = useState(data?.billingCycle || 'monthly');
-    const [errorState, setErrorState] = useState(false);
+const UserPlan = ({ nextStep, prevStep, handleFormDataChange, data }) => {
+  const [selectedPlan, setSelectedPlan] = useState(data?.plan || null);
+  const [billingCycle, setBillingCycle] = useState(
+    data?.billingCycle || "monthly",
+  );
+  const [errorState, setErrorState] = useState(false);
 
-    const handlePlanSelect = (plan) => {
-        setSelectedPlan(plan);
-        setErrorState(false)
-    };
+  const handlePlanSelect = (plan) => {
+    setSelectedPlan(plan);
+    setErrorState(false);
+  };
+  const handleBillingCycleChange = () => {
+    setBillingCycle((prev) => (prev === "monthly" ? "yearly" : "monthly"));
+  };
 
-    const handleBillingCycleChange = () => {
-        setBillingCycle((prev) => (prev === 'monthly' ? 'yearly' : 'monthly'));
-    };
+  const handleSubmit = () => {
+    if (!selectedPlan) {
+      setErrorState(true);
+      return;
+    }
+    handleFormDataChange("userPlan", { plan: selectedPlan, billingCycle });
+    nextStep();
+  };
 
-    const handleSubmit = () => {
-        if (!selectedPlan) {
-            setErrorState(true);
-            return;
-        }
-        handleFormDataChange('userPlan', {plan: selectedPlan, billingCycle});
-        nextStep();
-    };
+  return (
+    <PlanContainer>
+      <div>
+        <h1>Select your plan</h1>
+        <h4>You have the option of monthly or yearly billing.</h4>
+      </div>
 
-    return (
-        <PlanContainer>
-            <div>
-                <h1>Select your plan</h1>
-                <h4>You have the option of monthly or yearly billing.</h4>
-            </div>
+      <PlansWrapper>
+        {plans.map((plan) => (
+          <Plan
+            key={plan.id}
+            icon={plan.icon}
+            isMonthly={billingCycle === "monthly"}
+            isSelected={plan.id === selectedPlan?.id}
+            monthlyPrice={plan.monthlyPrice}
+            title={plan.title}
+            yearlyPrice={plan.yearlyPrice}
+            onSelect={() => handlePlanSelect(plan)}
+          />
+        ))}
+      </PlansWrapper>
 
-            <PlansWrapper>
-                {plans.map((plan) => (
-                    <Plan
-                        key={plan.id}
-                        icon={plan.icon}
-                        isMonthly={billingCycle === 'monthly'}
-                        isSelected={plan.id === selectedPlan?.id}
-                        monthlyPrice={plan.monthlyPrice}
-                        title={plan.title}
-                        yearlyPrice={plan.yearlyPrice}
-                        onSelect={() => handlePlanSelect(plan)}
-                    />
-                ))}
-            </PlansWrapper>
+      <SwitchContainer>
+        <span
+          className={`label ${billingCycle === "monthly" ? "selected" : "not-selected"}`}
+        >
+          Monthly
+        </span>
+        <Switch
+          checked={billingCycle === "yearly"}
+          onChange={handleBillingCycleChange}
+          color={"primary"}
+        />
+        <span
+          className={`label ${billingCycle === "yearly" ? "selected" : "not-selected"}`}
+        >
+          Yearly
+        </span>
+      </SwitchContainer>
 
-            <SwitchContainer>
-                <span
-                    className={`label ${billingCycle === 'monthly' ? 'selected' : 'not-selected'}`}>Monthly</span>
-                <Switch
-                    checked={billingCycle === 'yearly'}
-                    onChange={handleBillingCycleChange}
-                    color={'primary'}
-                />
-                <span
-                    className={`label ${billingCycle === 'yearly' ? 'selected' : 'not-selected'}`}>Yearly</span>
-            </SwitchContainer>
+      {errorState && (
+        <ErrorText>Please select a plan before proceeding.</ErrorText>
+      )}
 
-            {errorState && <ErrorText>Please select a plan before proceeding.</ErrorText>}
-
-            <ButtonContainer>
-                <Button
-                    variant="text"
-                    sx={{
-                        color: '#9b9ba5',
-                        backgroundColor: 'transparent',
-                        fontWeight: 'bold',
-                        '&:hover': {
-                            backgroundColor: 'transparent',
-                            color: '#01285a'
-                        }
-                    }}
-                    onClick={prevStep}
-                >
-                    Go Back
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                    sx={{
-                        backgroundColor: '#042858',
-                        height: '50px',
-                        '&:hover': {
-                            backgroundColor: '#031d45'
-                        }
-                    }}
-                >
-                    Next Step
-                </Button>
-            </ButtonContainer>
-        </PlanContainer>
-    );
+      <ButtonContainer>
+        <Button
+          variant="text"
+          sx={{
+            color: "#9b9ba5",
+            backgroundColor: "transparent",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "#01285a",
+            },
+          }}
+          onClick={prevStep}
+        >
+          Go Back
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          sx={{
+            backgroundColor: "#042858",
+            height: "50px",
+            "&:hover": {
+              backgroundColor: "#031d45",
+            },
+          }}
+        >
+          Next Step
+        </Button>
+      </ButtonContainer>
+    </PlanContainer>
+  );
 };
 
 export default UserPlan;

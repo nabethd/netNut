@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import SideBarBG from '../../../public/bg-sidebar-desktop.svg';
+import styled from "styled-components";
+import SideBarBG from "../../../public/bg-sidebar-desktop.svg";
 
 const Background = styled.div`
   background-image: url(${SideBarBG.src});
@@ -27,7 +27,7 @@ const StepItem = styled.li`
   display: flex;
   align-items: center;
   padding: 15px 0;
-  color: ${({active}) => (active ? 'black' : 'white')};
+  color: ${({ active }) => (active ? "black" : "white")};
 
   .circle {
     width: 36px;
@@ -37,9 +37,9 @@ const StepItem = styled.li`
     align-items: center;
     justify-content: center;
     margin-right: 18px;
-    background-color: ${({active}) => (active ? '#bce3fa' : 'transparent')};
-    color: ${({active}) => (active ? 'black' : 'white')};
-    border: ${({active}) => (active ? 'none' : '1px solid white')};
+    background-color: ${({ active }) => (active ? "#bce3fa" : "transparent")};
+    color: ${({ active }) => (active ? "black" : "white")};
+    border: ${({ active }) => (active ? "none" : "1px solid white")};
     font-weight: bold;
   }
 
@@ -52,41 +52,41 @@ const StepItem = styled.li`
     font-size: 12px;
     text-transform: uppercase;
     color: #999dff;
-
   }
 
   .step-description {
     font-size: 16px;
     font-weight: normal;
     color: white;
-
-
   }
 `;
 
-const Stepper = ({ActiveStep}) => {
-    const steps = [
-        {stepNumber: 1, title: 'YOUR INFO'},
-        {stepNumber: 2, title: 'SELECT PLAN'},
-        {stepNumber: 3, title: 'ADD-ONS'},
-        {stepNumber: 4, title: 'SUMMARY'}
-    ];
+const Stepper = ({ ActiveStep }) => {
+  const steps = [
+    { stepNumber: 1, title: "YOUR INFO" },
+    { stepNumber: 2, title: "SELECT PLAN" },
+    { stepNumber: 3, title: "ADD-ONS" },
+    { stepNumber: 4, title: "SUMMARY" },
+  ];
 
-    return (
-        <Background>
-            <StepList>
-                {steps.map((step) => (
-                    <StepItem key={step.stepNumber} active={step.stepNumber === ActiveStep}>
-                        <div className="circle">{step.stepNumber}</div>
-                        <div className="step-info">
-                            <div className="step-title">Step {step.stepNumber}</div>
-                            <div className="step-description">{step.title}</div>
-                        </div>
-                    </StepItem>
-                ))}
-            </StepList>
-        </Background>
-    );
+  return (
+    <Background>
+      <StepList>
+        {steps.map((step) => (
+          <StepItem
+            key={step.stepNumber}
+            active={step.stepNumber === ActiveStep}
+          >
+            <div className="circle">{step.stepNumber}</div>
+            <div className="step-info">
+              <div className="step-title">Step {step.stepNumber}</div>
+              <div className="step-description">{step.title}</div>
+            </div>
+          </StepItem>
+        ))}
+      </StepList>
+    </Background>
+  );
 };
 
 export default Stepper;
